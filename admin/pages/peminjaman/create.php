@@ -1,7 +1,7 @@
 <?php
 // Bagian Generate Invoice & Data Master tetap sama
 $today = date("Ymd");
-$query = "SELECT no_pinjam FROM peminjaman WHERE no_pinjam LIKE 'PJ/$today%' ORDER BY id DESC LIMIT 1";
+$query = "SELECT no_pinjam FROM peminjaman WHERE no_pinjam LIKE 'PJM/$today%' ORDER BY id DESC LIMIT 1";
 $result = mysqli_query($koneksi, $query);
 $data = mysqli_fetch_array($result);
 
@@ -12,7 +12,7 @@ if ($data) {
 } else {
     $number = 1;
 }
-$new_invoice = "PJ/" . $today . "/" . sprintf("%02s", $number);
+$new_invoice = "PJM/" . $today . "/" . sprintf("%02s", $number);
 
 $q_anggota = mysqli_query($koneksi, "SELECT * FROM anggota");
 $q_buku = mysqli_query($koneksi, "SELECT * FROM buku");
@@ -23,7 +23,9 @@ $q_buku = mysqli_query($koneksi, "SELECT * FROM buku");
         <div class="row">
             <div class="col-md-4">
                 <div class="card shadow-sm mb-4">
-                    <div class="card-header bg-dark text-white"><h6 class="mb-0">Informasi</h6></div>
+                    <div class="card-header bg-primary text-white">
+                        <h6 class="mb-0">Informasi</h6>
+                    </div>
                     <div class="card-body">
                         <div class="mb-3">
                             <label>No. Peminjaman</label>
@@ -59,10 +61,16 @@ $q_buku = mysqli_query($koneksi, "SELECT * FROM buku");
 
             <div class="col-md-8">
                 <div class="card shadow-sm">
-                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">Daftar Buku</h6>
-                        <button type="button" class="btn btn-light btn-sm" onclick="addRow()">+ Baris</button>
+                    <div class="card-header bg-success text-white">
+                        <div class="d-flex justify-content-between align-items-center w-100">
+                            <h6 class="mb-0">Daftar Buku</h6>
+
+                            <button type="button" class="btn btn-light btn-sm" onclick="addRow()">
+                                <i class="fas fa-plus"></i> Tambah Buku
+                            </button>
+                        </div>
                     </div>
+
                     <div class="card-body">
                         <table class="table table-bordered" id="itemTable">
                             <thead>
@@ -77,7 +85,7 @@ $q_buku = mysqli_query($koneksi, "SELECT * FROM buku");
                                     <td>
                                         <select class="form-control" name="buku_id[]" required>
                                             <option value="">-- Pilih Buku --</option>
-                                            <?php 
+                                            <?php
                                             mysqli_data_seek($q_buku, 0);
                                             while ($b = mysqli_fetch_assoc($q_buku)) { ?>
                                                 <option value="<?= $b['buku_id']; ?>"><?= $b['judul']; ?></option>
@@ -88,7 +96,9 @@ $q_buku = mysqli_query($koneksi, "SELECT * FROM buku");
                                         <input type="number" class="form-control" name="jumlah[]" value="1" min="1">
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-danger btn-sm remove-row" onclick="removeRow(this)">x</button>
+                                        <button type="button" class="btn btn-danger btn-sm remove-row" onclick="removeRow(this)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -102,18 +112,18 @@ $q_buku = mysqli_query($koneksi, "SELECT * FROM buku");
 </div>
 
 <script>
-function addRow() {
-    let table = document.getElementById('itemTable').getElementsByTagName('tbody')[0];
-    let row = document.querySelector('.item-row').cloneNode(true);
-    row.querySelector('select').selectedIndex = 0;
-    row.querySelector('input').value = 1;
-    table.appendChild(row);
-}
-
-function removeRow(btn) {
-    let table = document.getElementById('itemTable').getElementsByTagName('tbody')[0];
-    if (table.rows.length > 1) {
-        btn.closest('tr').remove();
+    function addRow() {
+        let table = document.getElementById('itemTable').getElementsByTagName('tbody')[0];
+        let row = document.querySelector('.item-row').cloneNode(true);
+        row.querySelector('select').selectedIndex = 0;
+        row.querySelector('input').value = 1;
+        table.appendChild(row);
     }
-}
+
+    function removeRow(btn) {
+        let table = document.getElementById('itemTable').getElementsByTagName('tbody')[0];
+        if (table.rows.length > 1) {
+            btn.closest('tr').remove();
+        }
+    }
 </script>

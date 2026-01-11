@@ -109,12 +109,14 @@
                                     <td class="text-center">
                                         <a href="dashboard.php?page=editanggota&id=<?= $anggota['id']; ?>"
                                             class="btn btn-sm btn-warning text-white mb-1">
+                                            Edit
                                             <i class="fas fa-edit"></i>
                                         </a>
 
                                         <a href="pages/anggota/action.php?act=delete&id=<?= $anggota['id']; ?>"
                                             class="btn btn-sm btn-danger mb-1"
                                             onclick="return confirm('Are you sure to delete this data?')">
+                                            Hapus
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </td>

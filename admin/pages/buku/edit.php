@@ -11,7 +11,7 @@ $data = mysqli_fetch_assoc($q);
 </div>
 
 <div class="content">
-    <div class="col-6">
+    <div class="col-12">
         <div class="card">
             <div class="card-body">
 
@@ -36,8 +36,8 @@ $data = mysqli_fetch_assoc($q);
 
                     <input class="form-control mb-3" name="stok" value="<?= $data['stok'] ?>" required>
 
-                    <button class="btn btn-primary">Update</button>
-                    <a href="dashboard.php?page=buku" class="btn btn-secondary">Kembali</a>
+                    <button type="submit" class="btn btn-success">Update</button>
+                    <a href="dashboard.php?page=buku" class="btn btn-danger">Kembali</a>
                 </form>
 
             </div>

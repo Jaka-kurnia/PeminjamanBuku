@@ -97,16 +97,18 @@
                 <tr>
                     <td class="text-center"><?= $no++; ?></td>
                     <td><?= $kategori['nama_kategori']; ?></td>
-                    <td class="text-center">
+                    <td class="text-center d-flex">
                         <a href="dashboard.php?page=editkategori&id=<?= $kategori['id']; ?>"
                             class="btn btn-sm btn-warning text-white mr-1">
                             <i class="fas fa-edit"></i>
+                           Edit
                         </a>
 
                         <a href="pages/kategori/action.php?act=delete&id=<?= $kategori['id']; ?>"
                             class="btn btn-sm btn-danger"
                             onclick="return confirm('Are you sure to delete this data?')">
                             <i class="fas fa-trash"></i>
+                            Hapus
                         </a>
                     </td>
                 </tr>

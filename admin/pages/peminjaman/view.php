@@ -24,12 +24,7 @@
                     <tbody>
                         <?php
                         $no = 1;
-                        /**
-                         * PERBAIKAN QUERY:
-                         * 1. Menggunakan LEFT JOIN ke peminjaman_detail
-                         * 2. Menggunakan SUM untuk menghitung total buku per transaksi
-                         * 3. Menggunakan GROUP BY agar perhitungan tidak tercampur
-                         */
+                    //    Query Join
                         $sql = "SELECT 
                                     peminjaman.*, 
                                     anggota.nama as anggota_name,

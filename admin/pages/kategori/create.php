@@ -31,7 +31,7 @@
                     <!-- Input untuk Nama Kategori -->
                     <!-- class form-group untuk grouping elemen input -->
                     <div class="form-group">
-                        <label>Category Name</label>
+                        <label>Nama Kategori</label>
                         <!-- name="category_name" adalah kunci yang akan diterima di $_POST['category_name'] -->
                         <!-- required artinya input ini tidak boleh kosong -->
                         <input type="text" class="form-control" name="nama_kategori" required>

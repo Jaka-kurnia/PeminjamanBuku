@@ -62,11 +62,13 @@
                                     <a href="dashboard.php?page=editbuku&buku_id=<?= $d['buku_id'] ?>"
                                        class="btn btn-warning btn-sm text-white">
                                         Edit
+                                        <i class="fas fa-edit"></i>
                                     </a>
 
                                     <a href="pages/buku/action.php?act=delete&buku_id=<?= $d['buku_id'] ?>"
                                        onclick="return confirm('Yakin hapus data ini?')"
                                        class="btn btn-danger btn-sm">
+                                       <i class="fas fa-trash"></i>
                                         Hapus
                                     </a>
                                 </td>

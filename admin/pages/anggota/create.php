@@ -16,8 +16,9 @@
 <!-- /.content-header -->
 
 <!-- Main content -->
+
 <div class="content">
-    <div class="col-6">
+    <div class="col-12">
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Add Anggota</h3>
@@ -60,11 +61,11 @@
                     <input class="form-control mb-2" type="text" name="no_hp"
                         placeholder="Nomor Handpone" required>
 
-                    <button type="submit" class="btn btn-primary">
-                        Submit
+                    <button type="submit" class="btn btn-success">
+                       Simpan
                     </button>
                     <button type="reset" class="btn btn-danger">
-                        Reset
+                        Batal
                     </button>
                 </form>
 

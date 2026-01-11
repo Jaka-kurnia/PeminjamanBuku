@@ -17,7 +17,7 @@ if (isset($_GET['page'])) {
             include "pages/buku/edit.php";
             break;
     }
-    // Parameter Kostomer
+    // Parameter Anggota
     switch ($page) {
         case "anggota":
             include "pages/anggota/view.php";
@@ -45,7 +45,7 @@ if (isset($_GET['page'])) {
             include "pages/kategori/edit.php";
             break;
     }
-    // Parameter Sales
+    // Parameter Peminjaman
     switch ($page) {
         case "peminjaman":
             include "pages/peminjaman/view.php";
@@ -58,6 +58,13 @@ if (isset($_GET['page'])) {
                 case "detailpeminjaman":
                     include "pages/peminjaman/detail.php";
                     break;
+    }
+
+    switch ($page){
+        case "main":
+            include "pages/main/view.php";
+            break;
+
     }
 } else {
     include "pages/home.php";

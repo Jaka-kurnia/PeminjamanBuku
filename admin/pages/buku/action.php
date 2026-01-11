@@ -9,9 +9,7 @@ if (!isset($_GET['act'])) {
 
 $act = $_GET['act'];
 
-/* =====================
-   INSERT
-===================== */
+// Logika Insert
 if ($act == "insert") {
 
     $kode_buku    = $_POST['kode_buku'];
@@ -41,9 +39,7 @@ if ($act == "insert") {
     exit;
 }
 
-/* =====================
-   UPDATE
-===================== */
+// Logika Update
 elseif ($act == "update") {
 
     $buku_id      = $_GET['buku_id'];
@@ -94,9 +90,7 @@ elseif ($act == "update") {
     exit;
 }
 
-/* =====================
-   DELETE
-===================== */
+// logika Delete
 elseif ($act == "delete") {
 
     $buku_id = $_GET['buku_id'];

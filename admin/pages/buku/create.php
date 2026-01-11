@@ -2,22 +2,20 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Add Product</h1>
-            </div><!-- /.col -->
+                <h1 class="m-0">Tambah Buku</h1>
+            </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item active">Starter Page</li>
                 </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+            </div>
+        </div>
+    </div>
 </div>
-<!-- /.content-header -->
 
-<!-- Main content -->
 <div class="content">
-    <div class="col-6">
+    <div class="col-12">
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Add Buku</h3>
@@ -44,7 +42,7 @@
                         placeholder="Tahun Terbit" required>
                         
                     <select class="form-control mb-2" name="kategori_id" required>
-                        <option value="">Choose Category</option>
+                        <option value="">Pilih Kategori</option>
 
                         <?php
                         $sql = "SELECT * FROM kategori";
@@ -59,17 +57,16 @@
 
                     <input class="form-control mb-2" type="text" name="stok"
                         placeholder="Stock" required>
-                    <button type="submit" class="btn btn-primary">
-                        Submit
+                    <button type="submit" class="btn btn-success">
+                        Simpan
                     </button>
                     <button type="reset" class="btn btn-danger">
-                        Reset
+                        Batal
                     </button>
                 </form>
 
             </div>
-            <!-- /.card-body -->
 
         </div>
-    </div><!-- /.container-fluid -->
+    </div>
 </div>

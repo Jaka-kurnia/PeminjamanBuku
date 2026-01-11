@@ -17,7 +17,7 @@
 
 <!-- Main content -->
 <div class="content">
-    <div class="col-6">
+    <div class="col-12">
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Edit Data Anggota</h3>
@@ -72,11 +72,9 @@
                     <?php
 
                     ?>
-                    <button type="submit" class="btn btn-success">
-                        Update
-                    </button>
+                    <button type="submit" class="btn btn-success">Update</button>
                     <button type="reset" class="btn btn-danger">
-                        Reset
+                        Kembali
                     </button>
                 </form>
 

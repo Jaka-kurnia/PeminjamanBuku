@@ -40,6 +40,7 @@
             <!-- Content Header (Page header) -->
             <?php include "content.php" ?>
         </div>
+
         <!-- /.content-wrapper -->
 
         <!-- Control Sidebar -->
@@ -52,12 +53,12 @@
         </aside>
         <!-- /.control-sidebar -->
 
+       
+
         <!-- Main Footer -->
         <?php include('../template/footer.php'); ?>
     </div>
-    <!-- ./wrapper -->
 
-    <!-- REQUIRED SCRIPTS -->
 
     <!-- jQuery -->
     <script src="../assets/plugins/jquery/jquery.min.js"></script>

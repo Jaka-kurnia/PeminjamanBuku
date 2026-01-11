@@ -1,5 +1,4 @@
 <?php
-// Pastikan koneksi database sudah disertakan sebelumnya, misal: include 'koneksi.php';
 
 // Ambil ID dari URL dan amankan dari SQL Injection
 $peminjaman_id = isset($_GET['id']) ? mysqli_real_escape_string($koneksi, $_GET['id']) : '';

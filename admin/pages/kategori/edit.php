@@ -46,7 +46,7 @@ $data = mysqli_fetch_array($query); // Mengambil data sebagai array
                     
                     <!-- Tombol Simpan Perubahan -->
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" class="btn btn-success">Update</button>
                     </div>
                 </form>
             </div>
