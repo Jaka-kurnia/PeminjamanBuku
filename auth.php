@@ -22,7 +22,7 @@ if ($cekuser == 0) {
 } else {
     $datauser = mysqli_fetch_array($query);
     $_SESSION['status_login'] = true;
-    $_SESSION['name'] = $datauser['name'];
+    $_SESSION['nama'] = $datauser['nama'];
     $_SESSION['email'] = $datauser['email'];
     $_SESSION['role'] = $datauser['role'];
     header("location:admin/dashboard.php");
