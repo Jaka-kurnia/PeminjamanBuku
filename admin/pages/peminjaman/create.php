@@ -53,6 +53,7 @@ $q_buku = mysqli_query($koneksi, "SELECT * FROM buku");
                             <select class="form-control" name="status" required>
                                 <option value="dipinjam">Dipinjam</option>
                                 <option value="tersedia">Tersedia</option>
+                                <option value="kembali">Dikembalikan</option>
                             </select>
                         </div>
                     </div>
