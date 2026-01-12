@@ -2,53 +2,92 @@
 include "../../../config/koneksi.php";
 session_start();
 
-if (isset($_GET['act'])) {
-    $act = $_GET['act'];
+if (isset($_GET['act']) && $_GET['act'] == "insert") {
 
-    if ($act == "insert") {
-        // Mengamankan input string
-        $no_pinjam = mysqli_real_escape_string($koneksi, $_POST['no_pinjam']);
-        $anggota_id = mysqli_real_escape_string($koneksi, $_POST['anggota_id']);
-        $tanggal_pinjam = $_POST['tanggal_pinjam'];
-        $tanggal_kembali = $_POST['tanggal_kembali'];
-        $status = $_POST['status'];
-        $user_id = $_SESSION['user_id'] ?? 1;
+    mysqli_begin_transaction($koneksi);
 
-        // 1. Insert ke tabel peminjaman
-        $sql = "INSERT INTO peminjaman (no_pinjam, anggota_id, user_id, tanggal_pinjam, tanggal_kembali, status) 
-                VALUES ('$no_pinjam', '$anggota_id', '$user_id', '$tanggal_pinjam', '$tanggal_kembali', '$status')";
+    try {
+        $no_pinjam        = mysqli_real_escape_string($koneksi, $_POST['no_pinjam']);
+        $anggota_id       = mysqli_real_escape_string($koneksi, $_POST['anggota_id']);
+        $tanggal_pinjam   = $_POST['tanggal_pinjam'];
+        $tanggal_kembali  = $_POST['tanggal_kembali'];
+        $status           = $_POST['status'];
+        $user_id          = $_SESSION['user_id'] ?? 1;
 
-        if (mysqli_query($koneksi, $sql)) {
-            $peminjaman_id = mysqli_insert_id($koneksi);
+        // 1️⃣ Insert tabel peminjaman
+        $sql = "INSERT INTO peminjaman 
+                (no_pinjam, anggota_id, user_id, tanggal_pinjam, tanggal_kembali, status)
+                VALUES 
+                ('$no_pinjam', '$anggota_id', '$user_id', '$tanggal_pinjam', '$tanggal_kembali', '$status')";
 
-            // 2. Ambil data array dari form
-            $buku_id_array = $_POST['buku_id'] ?? []; 
-            $jumlah_array = $_POST['jumlah'] ?? []; // Pastikan ini 'jumlah', bukan 'qty'
+        if (!mysqli_query($koneksi, $sql)) {
+            throw new Exception("Gagal simpan peminjaman");
+        }
 
-            for ($i = 0; $i < count($buku_id_array); $i++) {
-                $id_buku = mysqli_real_escape_string($koneksi, $buku_id_array[$i]);
-                $jml = mysqli_real_escape_string($koneksi, $jumlah_array[$i] ?? 0);
+        $peminjaman_id = mysqli_insert_id($koneksi);
 
-                if (!empty($id_buku)) {
-                    // PERBAIKAN: Nama tabel sesuai database adalah peminjaman_detail
-                    $sql_detail = "INSERT INTO detail_peminjaman (peminjaman_id, buku_id, jumlah) 
-                                   VALUES ('$peminjaman_id', '$id_buku', '$jml')";
+        // 2️⃣ Ambil detail buku
+        $buku_id_array = $_POST['buku_id'] ?? [];
+        $jumlah_array  = $_POST['jumlah'] ?? [];
 
-                    mysqli_query($koneksi, $sql_detail);
-                }
+        for ($i = 0; $i < count($buku_id_array); $i++) {
+
+            $buku_id = mysqli_real_escape_string($koneksi, $buku_id_array[$i]);
+            $jumlah  = (int) $jumlah_array[$i];
+
+            if ($buku_id == '' || $jumlah <= 0) {
+                continue;
             }
 
-            $_SESSION['message'] = 'Transaksi Berhasil Disimpan';
-            $_SESSION['alert_type'] = 'alert-success';
-            $_SESSION['type'] = 'Success';
-            header('location:../../dashboard.php?page=peminjaman');
-            exit;
-        } else {
-            $_SESSION['message'] = 'Transaksi Gagal: ' . mysqli_error($koneksi);
-            $_SESSION['alert_type'] = 'alert-danger';
-            $_SESSION['type'] = 'Failed';
-            header('location:../../dashboard.php?page=addpeminjaman');
-            exit;
+            // 3️⃣ Cek stok buku
+            $cek = mysqli_query($koneksi, 
+                "SELECT stok FROM buku WHERE buku_id='$buku_id' FOR UPDATE"
+            );
+
+            $data = mysqli_fetch_assoc($cek);
+
+            if ($data['stok'] < $jumlah) {
+                throw new Exception("Stok buku tidak mencukupi");
+            }
+
+            // 4️⃣ Insert detail peminjaman
+            $sql_detail = "INSERT INTO detail_peminjaman 
+                           (peminjaman_id, buku_id, jumlah)
+                           VALUES 
+                           ('$peminjaman_id', '$buku_id', '$jumlah')";
+
+            if (!mysqli_query($koneksi, $sql_detail)) {
+                throw new Exception("Gagal simpan detail peminjaman");
+            }
+
+            // 5️⃣ Kurangi stok buku
+            $update_stok = "UPDATE buku 
+                            SET stok = stok - $jumlah 
+                            WHERE buku_id = '$buku_id'";
+
+            if (!mysqli_query($koneksi, $update_stok)) {
+                throw new Exception("Gagal update stok buku");
+            }
         }
+
+        // 6️⃣ Commit jika semua sukses
+        mysqli_commit($koneksi);
+
+        $_SESSION['message'] = 'Transaksi berhasil & stok otomatis berkurang';
+        $_SESSION['alert_type'] = 'alert-success';
+        $_SESSION['type'] = 'Success';
+        header('location:../../dashboard.php?page=peminjaman');
+        exit;
+
+    } catch (Exception $e) {
+
+        // ❌ Jika gagal → rollback
+        mysqli_rollback($koneksi);
+
+        $_SESSION['message'] = 'Transaksi gagal: ' . $e->getMessage();
+        $_SESSION['alert_type'] = 'alert-danger';
+        $_SESSION['type'] = 'Failed';
+        header('location:../../dashboard.php?page=addpeminjaman');
+        exit;
     }
 }
