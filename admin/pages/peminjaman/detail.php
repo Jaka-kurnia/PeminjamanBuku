@@ -58,7 +58,7 @@ if (!$header) {
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-6">
-                        <strong>Nama Anggota:</strong><br>
+                        <strong>Nama Peminjam:</strong><br>
                         <?php echo htmlspecialchars($header['anggota_name']); ?><br><br>
                         <strong>Tanggal Pinjam:</strong><br>
                         <?php echo date('d-m-Y', strtotime($header['tanggal_pinjam'])); ?>
