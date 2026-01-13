@@ -67,7 +67,7 @@ $current_page = isset($_GET['page']) ? $_GET['page'] : '';
                          </li>
                          <li class="nav-item">
                              <a href="dashboard.php?page=kategori" class="nav-link <?php echo ($current_page == 'kategori') ? 'active' : ''; ?>">
-                                 <i class="bi bi-list text-lg"></i>
+                                 <i class="bi bi-tags text-lg"></i>
                                  <p>Kategori</p>
                              </a>
                          </li>

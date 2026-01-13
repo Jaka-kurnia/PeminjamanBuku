@@ -2,7 +2,6 @@
 include "../../../config/koneksi.php";
 session_start();
 
-// --- LOGIKA SIMPAN PEMINJAMAN (KODE AWAL ANDA) ---
 if (isset($_GET['act']) && $_GET['act'] == "insert") {
 
     mysqli_begin_transaction($koneksi);
@@ -15,7 +14,7 @@ if (isset($_GET['act']) && $_GET['act'] == "insert") {
         $status           = $_POST['status'];
         $user_id          = $_SESSION['user_id'] ?? 1;
 
-        // 1️⃣ Insert tabel peminjaman
+        // Tambaha Peminjaman
         $sql = "INSERT INTO peminjaman 
                 (no_pinjam, anggota_id, user_id, tanggal_pinjam, tanggal_kembali, status)
                 VALUES 
@@ -27,7 +26,7 @@ if (isset($_GET['act']) && $_GET['act'] == "insert") {
 
         $peminjaman_id = mysqli_insert_id($koneksi);
 
-        // 2️⃣ Ambil detail buku
+    // Proses detail peminjaman
         $buku_id_array = $_POST['buku_id'] ?? [];
         $jumlah_array  = $_POST['jumlah'] ?? [];
 
@@ -51,7 +50,7 @@ if (isset($_GET['act']) && $_GET['act'] == "insert") {
                 throw new Exception("Stok buku tidak mencukupi");
             }
 
-            // 4️⃣ Insert detail peminjaman
+            // Tambah Detail Peminjaman
             $sql_detail = "INSERT INTO detail_peminjaman 
                            (peminjaman_id, buku_id, jumlah)
                            VALUES 
@@ -61,7 +60,7 @@ if (isset($_GET['act']) && $_GET['act'] == "insert") {
                 throw new Exception("Gagal simpan detail peminjaman");
             }
 
-            // 5️⃣ Kurangi stok buku
+        
             $update_stok = "UPDATE buku 
                             SET stok = stok - $jumlah 
                             WHERE buku_id = '$buku_id'";
