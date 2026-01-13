@@ -12,7 +12,9 @@
                     <a href="dashboard.php?page=addbuku" class="btn btn-primary mb-3">
                         Tambah Data
                     </a>
-                    <!-- <a href="pages/products/print.php" class="btn btn-success" target="_blank">Cetak</a> -->
+                    <a href="pages/buku/print.php" class="btn btn-success mb-3" target="_blank">
+                    <i class="fas fa-print"></i>    
+                    Cetak</a>
                 </div>
                 <?php if (isset($_SESSION['message'])) { ?>
                     <div class="alert <?= $_SESSION['alert_type']; ?>">

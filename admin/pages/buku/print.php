@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Product</title>
+    <title>Data Buku</title>
 
     <!-- Paper CSS -->
     <link rel="stylesheet" href="../../../assets/paper/paper.css">
@@ -26,7 +26,7 @@
 
 <?php
 include '../../../config/koneksi.php';
-$query = "SELECT * FROM customers";
+$query = "SELECT * FROM buku INNER JOIN kategori on buku.kategori_id=kategori.id  ORDER BY buku_id ASC";
 $execute = mysqli_query($koneksi, $query);
 ?>
 
@@ -36,29 +36,36 @@ $execute = mysqli_query($koneksi, $query);
 
     <div class="container-fluid">
 
-        <h4 class="text-center mb-4 fw-bold">List Customers</h4>
+        <h4 class="text-center mb-4 fw-bold">List Buku</h4>
 
         <table class="table table-bordered table-striped table-sm">
             <thead class="table-primary text-center text-white">
                 <tr>
                     <th width="5%">No</th>
-                    <th>Customer Code</th>
-                    <th>Customer Name</th>
-                    <th>Phone</th>
-                    <th>Address</th>
+                    <th>Kode Buku</th>
+                    <th>Judul Buku</th>
+                    <th>Penulis</th>
+                    <th>Penerbit</th>
+                    <th>Tahun Terbit</th>
+                    <th>Kategori</th>
+                    <th>Stok</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 $no = 1;
-                while ($customer = mysqli_fetch_array($execute)) {
+                while ($data = mysqli_fetch_array($execute)) {
                 ?>
                     <tr>
                         <td class="text-center"><?php echo $no; ?></td>
-                        <td><?php echo $customer['customer_code']; ?></td>
-                        <td><?php echo $customer['customer_name']; ?></td>
-                        <td><?php echo $customer['phone']; ?></td>
-                        <td><?php echo $customer['customer_address']; ?></td>
+                        <td><?php echo $data['kode_buku']; ?></td>
+                        <td><?php echo $data['judul']; ?></td>
+                        <td><?php echo $data['pengarang']; ?></td>
+                        <td><?php echo $data['penerbit']; ?></td>
+                        <td><?php echo $data['tahun_terbit']; ?></td>
+                        <td><?php echo $data['nama_kategori']; ?></td>
+                        <td><?php echo $data['stok']; ?></td>
+
                     </tr>
                 <?php
                     $no++;

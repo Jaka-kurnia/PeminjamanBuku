@@ -33,7 +33,9 @@
             <div class="card-body">
                 <div class="d-flex mb-3 justify-content-between">
                     <a href="dashboard.php?page=addkategori" class="btn btn-primary ">Tambah Data</a>
-                    <a href="pages/products/print.php" class="btn btn-success" target="_blank">Cetak</a>
+                    <a href="pages/kategori/print.php" class="btn btn-success" target="_blank">Cetak
+                        <i class="fas fa-print"></i>
+                    </a>
                 </div>
                 <?php
 

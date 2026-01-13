@@ -33,7 +33,8 @@
             <div class="card-body">
                 <div class="d-flex mb-3 justify-content-between">
                     <a href="dashboard.php?page=addanggota" class="btn btn-primary ">Tambah Data</a>
-                    <a href="pages/products/print.php" class="btn btn-success" target="_blank">Cetak</a>
+                    <a href="pages/anggota/print.php" class="btn btn-success" target="_blank">
+                    <i class="fas fa-print"></i>    Cetak</a>
                 </div>
                 <?php
 
@@ -95,7 +96,7 @@
                         <tbody>
                             <?php
                             $no = 1;
-                            $sql = "SELECT * FROM anggota";
+                            $sql = "SELECT * FROM anggota ORDER BY nama ASC";
                             $query = mysqli_query($koneksi, $sql);
                             while ($anggota = mysqli_fetch_array($query)) {
                             ?>
