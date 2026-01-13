@@ -9,9 +9,9 @@ if (isset($_GET['page'])) {
             include "pages/buku/view.php";
             break;
 
-            case "addbuku":
-                include "pages/buku/create.php";
-                break;
+        case "addbuku":
+            include "pages/buku/create.php";
+            break;
 
         case "editbuku":
             include "pages/buku/edit.php";
@@ -23,9 +23,9 @@ if (isset($_GET['page'])) {
             include "pages/anggota/view.php";
             break;
 
-            case "addanggota":
-                include "pages/anggota/create.php";
-                break;
+        case "addanggota":
+            include "pages/anggota/create.php";
+            break;
 
         case "editanggota":
             include "pages/anggota/edit.php";
@@ -37,11 +37,11 @@ if (isset($_GET['page'])) {
             include "pages/kategori/view.php";
             break;
 
-            case "addkategori";
+        case "addkategori";
             include "pages/kategori/create.php";
             break;
 
-            case "editkategori";
+        case "editkategori";
             include "pages/kategori/edit.php";
             break;
     }
@@ -51,21 +51,26 @@ if (isset($_GET['page'])) {
             include "pages/peminjaman/view.php";
             break;
 
-            case "addpeminjaman":
-                include "pages/peminjaman/create.php";
-                break;
+        case "addpeminjaman":
+            include "pages/peminjaman/create.php";
+            break;
 
-                case "detailpeminjaman":
-                    include "pages/peminjaman/detail.php";
-                    break;
+        case "detailpeminjaman":
+            include "pages/peminjaman/detail.php";
+            break;
     }
 
-    switch ($page){
+    switch ($page) {
         case "main":
             include "pages/main/view.php";
             break;
-
     }
+
+    // switch ($page) {
+    //     case "pengembalian":
+    //         include "pages/pengembalian/view.php";
+    //         break;
+    // }
 } else {
     include "pages/home.php";
 }

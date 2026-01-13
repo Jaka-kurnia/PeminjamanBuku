@@ -89,6 +89,12 @@ $current_page = isset($_GET['page']) ? $_GET['page'] : '';
                                  <p>Peminjaman</p>
                              </a>
                          </li>
+                         <!-- <li class="nav-item">
+                             <a href="dashboard.php?page=pengembalian" class="nav-link <?php echo ($current_page == 'pengembalian') ? 'active' : ''; ?>">
+                                 <i class="bi bi-receipt-cutoff text-lg"></i>
+                                 <p>Pengembalian</p>
+                             </a>
+                         </li> -->
                      </ul>
                  </li>
                  <li class="nav-item">

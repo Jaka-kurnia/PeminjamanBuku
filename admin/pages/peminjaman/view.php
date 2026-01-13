@@ -3,7 +3,7 @@
         <h4 class="mb-0">Data Peminjaman Buku</h4>
     </div>
     <a href="dashboard.php?page=addpeminjaman" class="btn btn-primary btn-sm">
-        <i class="fas fa-plus"></i> Tambah 
+        <i class="fas fa-plus"></i> Tambah
     </a>
 
     <div class="card shadow-sm">
@@ -24,7 +24,7 @@
                     <tbody>
                         <?php
                         $no = 1;
-                    //    Query Join
+                        //    Query Join
                         $sql = "SELECT 
                                     peminjaman.*, 
                                     anggota.nama as anggota_name,
@@ -33,15 +33,15 @@
                                 LEFT JOIN anggota ON peminjaman.anggota_id = anggota.id 
                                 LEFT JOIN detail_peminjaman ON peminjaman.id = detail_peminjaman.peminjaman_id
                                 GROUP BY peminjaman.id
-                                ORDER BY peminjaman.id DESC"; 
-                        
+                                ORDER BY peminjaman.id DESC";
+
                         $query = mysqli_query($koneksi, $sql);
 
                         while ($data = mysqli_fetch_array($query)) {
                         ?>
                             <tr>
                                 <td><?php echo $no; ?></td>
-                                <td><strong><?php echo $data['no_pinjam']; ?></strong></td> 
+                                <td><strong><?php echo $data['no_pinjam']; ?></strong></td>
                                 <td><?php echo $data['tanggal_pinjam']; ?></td>
                                 <td><?php echo $data['tanggal_kembali']; ?></td>
                                 <td>
@@ -53,11 +53,29 @@
                                     </span>
                                 </td>
                                 <td class="text-center">
-                                    <a href="dashboard.php?page=detailpeminjaman&id=<?php echo $data['id']; ?>"
-                                       class="btn btn-sm btn-info text-white">
-                                        <i class="fas fa-eye"></i> Detail
-                                    </a>
+                                    <div class="d-flex justify-content-center align-items-center" style="gap: 5px;">
+
+                                        <a href="dashboard.php?page=detailpeminjaman&id=<?= $data['id']; ?>"
+                                            class="btn btn-sm btn-info text-white"
+                                            title="Lihat Detail">
+                                            <i class="fas fa-eye"></i> Detail
+                                        </a>
+
+                                        <?php if ($data['status'] == 'dipinjam'): ?>
+                                            <a href="pages/peminjaman/action.php?act=return&id=<?= $data['id']; ?>"
+                                                class="btn btn-sm btn-success"
+                                                onclick="return confirm('Konfirmasi: Apakah buku benar-benar sudah dikembalikan?')">
+                                                <i class="bi bi-arrow-return-left"></i> Kembalikan
+                                            </a>
+                                        <?php else: ?>
+                                            <span class="badge badge-secondary p-2">
+                                                <i class="fas fa-check-circle"></i> Selesai
+                                            </span>
+                                        <?php endif; ?>
+
+                                    </div>
                                 </td>
+
                             </tr>
                         <?php $no++;
                         } ?>
