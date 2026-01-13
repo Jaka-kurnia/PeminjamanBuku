@@ -64,12 +64,12 @@
                 ?>
                 <!-- Form FIlter-->
                 <form method="GET" action="">
-                    <input type="hidden" name="page" value="buku">
+                    <input type="hidden" name="page" value="anggota">
                     <div class="row">
                         <div class="col-10">
-                            <input class="form-control mb-2" type="text" name="judul"
-                                placeholder="Judul Buku" value="<?php if (isset($_GET['judul'])) {
-                                                                    echo $_GET['judul'];
+                            <input class="form-control mb-2" type="text" name="anggota"
+                                placeholder="Nama Anggota" value="<?php if (isset($_GET['anggota'])) {
+                                                                    echo $_GET['anggota'];
                                                                 } ?>">
                         </div>
                         <div class="col-2">

@@ -16,7 +16,7 @@ $cekuser = mysqli_num_rows($query);
 
 // Logic user login
 if ($cekuser == 0) {
-    header("location:index.php");
+    header("location:login.php");
     $_SESSION['message'] = 'Username or Password Wrong';
     mysqli_close($koneksi);
 } else {

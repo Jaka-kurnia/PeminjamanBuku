@@ -43,7 +43,7 @@
         <a href="assets/index2.html" class="h1"><b>LTE </b>| POST</a>
       </div>
       <div class="card-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+        <p class="login-box-msg">Jaka Kurnia Management Informatika</p>
 
         <form action="auth.php" method="post">
           <div class="input-group mb-3">
