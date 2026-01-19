@@ -42,6 +42,7 @@
             <?php include "content.php" ?>
         </div>
 
+
         <!-- /.content-wrapper -->
 
         <!-- Control Sidebar -->
